@@ -7,13 +7,50 @@
     </head>
     <body>
         <div class="search">
+            <h1 class="header">Weather</h1>
             <input type="text" placeholder="Find your weather" id="search-input" />
             <button class="search-btn">Search</button>
         </div>
         <div class="card-container">
-            <div class="card yesterday-card"></div>
-            <div class="card today-card"></div>
-            <div class="card tommorow-card"></div>
+            <div class="card yesterday-card">
+                <h2>Yesterday</h2>
+                <img
+                    src="https://placehold.co/600x400?text=Loading+Image"
+                    alt=""
+                    class="yesterday-condition-icon condition-icon"
+                />
+                <div class="temp-container">
+                    <div class="yesterday-low-temp low-temp">Low:</div>
+
+                    <div class="yesterday-high-temp high-temp">High:</div>
+                </div>
+            </div>
+            <div class="card today-card">
+                <h2>Today</h2>
+                <img
+                    src="https://placehold.co/600x400?text=Loading+Image"
+                    alt=""
+                    class="today-condition-icon condition-icon"
+                />
+                <div class="temp-container">
+                    <div class="today-low-temp low-temp">Low:</div>
+                    <div class="today-current-temp"></div>
+                    <div class="today-high-temp high-temp">High:</div>
+                </div>
+            </div>
+            <div class="card tomorrow-card">
+                <h2>Tomorrow</h2>
+                <img
+                    src="https://placehold.co/600x400?text=Loading+Image"
+                    alt=""
+                    class="tomorrow-condition-icon condition-icon"
+                />
+                <div class="temp-container">
+                    <div class="tomorrow-low-temp low-temp">Low:</div>
+
+                    <div class="tomorrow-high-temp high-temp">High:</div>
+                </div>
+            </div>
         </div>
     </body>
 </html>

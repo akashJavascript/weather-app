@@ -3,7 +3,7 @@ import './style.css';
 const apiKey = '75b9a99ff5ee4179b7c175556230910';
 const searchBar = document.querySelector('#search-input');
 const searchBtn = document.querySelector('.search-btn');
-
+let place = 'Foster City';
 async function getWeather(city) {
     if (!city) {
         return alert('Please enter a city');
@@ -56,7 +56,8 @@ async function getWeather(city) {
         conditionIcon: yesterdayConditionIcon,
     } = getTemperature(yesterday);
     const currentTemp = todayAndTomorrowForecastData.current.temp_f;
-    return {
+    console.log(yesterdayHigh, yesterdayLow, yesterdayConditionIcon);
+    return displayWeather(
         todayHigh,
         todayLow,
         todayConditionIcon,
@@ -67,13 +68,59 @@ async function getWeather(city) {
         yesterdayLow,
         yesterdayConditionIcon,
         currentTemp,
-    };
+    );
 }
+async function displayWeather(
+    todayHigh,
+    todayLow,
+    todayConditionIcon,
+    tomorrowHigh,
+    tomorrowLow,
+    tomorrowConditionIcon,
+    yesterdayHigh,
+    yesterdayLow,
+    yesterdayConditionIcon,
+    currentTemp,
+) {
+    // console.log(todayHigh, todayLow, todayConditionIcon);
+    // console.log(tomorrowHigh, tomorrowLow, tomorrowConditionIcon);
+    // console.log(yesterdayHigh, yesterdayLow, yesterdayConditionIcon);
+    function setElementContent(selector, content) {
+        if (
+            selector === '.today-current-temp' ||
+            selector === '.today-high-temp' ||
+            selector === '.today-low-temp' ||
+            selector === '.tomorrow-high-temp' ||
+            selector === '.tomorrow-low-temp' ||
+            selector === '.yesterday-high-temp' ||
+            selector === '.yesterday-low-temp'
+        ) {
+            document.querySelector(selector).textContent = '';
+            document.querySelector(selector).textContent += ` ${content}° F`;
+        } else {
+            document.querySelector(selector).textContent = content;
+        }
+    }
 
+    function setElementSrc(selector, src) {
+        document.querySelector(selector).src = src;
+    }
+
+    setElementContent('.yesterday-high-temp', yesterdayHigh);
+    // console.log(yesterdayHigh);
+    setElementContent('.yesterday-low-temp', yesterdayLow);
+    setElementSrc('.yesterday-condition-icon', yesterdayConditionIcon);
+    setElementContent('.today-high-temp', todayHigh);
+    setElementContent('.today-low-temp', todayLow);
+    setElementSrc('.today-condition-icon', todayConditionIcon);
+    setElementContent('.tomorrow-high-temp', tomorrowHigh);
+    setElementContent('.tomorrow-low-temp', tomorrowLow);
+    setElementSrc('.tomorrow-condition-icon', tomorrowConditionIcon);
+    setElementContent('.today-current-temp', currentTemp);
+}
 searchBtn.addEventListener('click', async () => {
-    const city = searchBar.value;
-    const weatherData = await getWeather(city);
+    place = searchBar.value;
+    const weatherData = await getWeather(place);
     console.log(weatherData);
 });
-
-console.log(getWeather('Foster City'));
+getWeather('Foster City');
